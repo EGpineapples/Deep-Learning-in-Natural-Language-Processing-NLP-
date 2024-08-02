@@ -87,18 +87,13 @@ Unsupervised SimCSE predicts the input sentence itself using dropout as noise an
 
 The two key properties for improving sentence embeddings in supervised SimCSE are alignment and uniformity:
 
-Alignment: $\text{Alignment} = \mathbb{E}_{(x,x^+) \sim p_\text{pos}} [\|f(x)-f(x^+)\|^2]$
-
-Uniformity: $\text{Uniformity} = \log \mathbb{E}_{x,y \sim p_\text{data}} [e^{-2\|f(x)-f(y)\|^2}]$
-
-
-## Conclusion
-
-This repository demonstrates advanced techniques in NLP, focusing on improving model efficiency, alignment with human preferences, and factual accuracy in language generation.
-
+Alignment: 𝑨𝒍𝒊𝒈𝒏𝒎𝒆𝒏𝒕 = 𝔼_(𝒙,𝒙^+ )~𝒑_𝒑𝒐𝒔 [‖𝒇(𝒙)−𝒇(𝒙^+ )‖^𝟐 ]
 
 Uniformity: 𝑼𝒏𝒊𝒇𝒐𝒓𝒎𝒊𝒕𝒚 = 𝐥𝐨𝐠 𝔼_(𝒙,𝒚~𝒑_𝒅𝒂𝒕𝒂) [𝒆^(−𝟐‖𝒇(𝒙)−𝒇(𝒚)‖^𝟐 ) ]
 
+
 ## Conclusion
 
 This repository demonstrates advanced techniques in NLP, focusing on improving model efficiency, alignment with human preferences, and factual accuracy in language generation.
+
+
