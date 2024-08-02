@@ -38,6 +38,7 @@ This section implements DPO for aligning language models with human preferences,
 
 Key code snippet for DPO loss calculation:
 
+```python
 def compute_log_probability(model, sentence):
     tokenize_input = tokenizer.encode(sentence, return_tensors="pt")
     outputs = model(tokenize_input, labels=tokenize_input)
@@ -46,11 +47,14 @@ def compute_log_probability(model, sentence):
 
 # Compute DPO loss
 beta = 1
-dpo_loss = -math.log(
-    math.exp(beta * (log_prob_winner_pretrained - log_prob_winner_random)) /
-    (math.exp(beta * (log_prob_winner_pretrained - log_prob_winner_random)) +
-     math.exp(beta * (log_prob_loser_pretrained - log_prob_loser_random)))
-)
+$$ \text{DPO Loss} = -\log\left(\frac{\exp(\beta \cdot (\log p_\theta(y_w|x) - \log p_\text{ref}(y_w|x)))}{\exp(\beta \cdot (\log p_\theta(y_w|x) - \log p_\text{ref}(y_w|x))) + \exp(\beta \cdot (\log p_\theta(y_l|x) - \log p_\text{ref}(y_l|x)))}\right) $$
+Where:
+
+$p_\theta$ is the fine-tuned model
+$p_\text{ref}$ is the reference model
+$y_w$ is the winning (preferred) response
+$y_l$ is the losing (non-preferred) response
+$x$ is the input prompt
 
 ## Factuality in Language Models
 
