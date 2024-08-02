@@ -15,40 +15,6 @@ This section implements Low Rank Adaptation (LoRA) on BERT's attention mechanism
 
 Key code snippet for LoRA implementation:
 
-class BertSelfAttentionLora(nn.Module):
-    def __init__(self, config, position_embedding_type=None):
-        super().__init__()
-        # ... (initialization code)
-        
-        # LoRA parameters
-        self.rank = 4
-        self.A_q = nn.Parameter(torch.randn(self.all_head_size, self.rank))
-        self.B_q = nn.Parameter(torch.randn(self.rank, config.hidden_size))
-        self.A_k = nn.Parameter(torch.randn(self.all_head_size, self.rank))
-        self.B_k = nn.Parameter(torch.randn(self.rank, config.hidden_size))
-
-    def forward(self, hidden_states, ...):
-        # ... (forward pass code)
-        lora_query_layer = self.query(hidden_states) + self.A_q.matmul(self.B_q.matmul(hidden_states.transpose(-1, -2))).transpose(-1, -2)
-        lora_key_layer = self.key(hidden_states) + self.A_k.matmul(self.B_k.matmul(hidden_states.transpose(-1, -2))).transpose(-1, -2)
-
-# Deep Learning in Natural Language Processing (NLP)
-
-## Overview
-This repository contains implementations and experiments related to parameter-efficient fine-tuning and alignment of language models, focusing on techniques like Low Rank Adaptation (LoRA) and Direct Preference Optimization (DPO).
-
-## Table of Contents
-1. Parameter Efficient Fine-Tuning with LoRA
-2. Direct Preference Optimization (DPO)
-3. Factuality in Language Models
-4. Sentence Embeddings (SimCSE)
-
-## Parameter Efficient Fine-Tuning with LoRA
-
-This section implements Low Rank Adaptation (LoRA) on BERT's attention mechanism and fine-tunes a bert-base-cased model on the Yelp reviews dataset.
-
-Key code snippet for LoRA implementation:
-
 ```python
 class BertSelfAttentionLora(nn.Module):
     def __init__(self, config, position_embedding_type=None):
