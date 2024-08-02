@@ -49,6 +49,7 @@ This section implements Low Rank Adaptation (LoRA) on BERT's attention mechanism
 
 Key code snippet for LoRA implementation:
 
+```python
 class BertSelfAttentionLora(nn.Module):
     def __init__(self, config, position_embedding_type=None):
         super().__init__()
@@ -65,6 +66,7 @@ class BertSelfAttentionLora(nn.Module):
         # ... (forward pass code)
         lora_query_layer = self.query(hidden_states) + self.A_q.matmul(self.B_q.matmul(hidden_states.transpose(-1, -2))).transpose(-1, -2)
         lora_key_layer = self.key(hidden_states) + self.A_k.matmul(self.B_k.matmul(hidden_states.transpose(-1, -2))).transpose(-1, -2)
+```
 
 ## Direct Preference Optimization (DPO)
 
@@ -72,11 +74,13 @@ This section implements DPO for aligning language models with human preferences,
 
 Key code snippet for DPO loss calculation:
 
+```python
 def compute_log_probability(model, sentence):
     tokenize_input = tokenizer.encode(sentence, return_tensors="pt")
     outputs = model(tokenize_input, labels=tokenize_input)
     log_prob = outputs.loss * -1
     return log_prob.item()
+```
 
 Compute DPO loss:
 
@@ -120,6 +124,7 @@ The two key properties for improving sentence embeddings in supervised SimCSE ar
 Alignment: $\text{Alignment} = \mathbb{E}_{(x,x^+) \sim p_\text{pos}} [\|f(x)-f(x^+)\|^2]$
 
 Uniformity: $\text{Uniformity} = \log \mathbb{E}_{x,y \sim p_\text{data}} [e^{-2\|f(x)-f(y)\|^2}]$
+
 
 ## Conclusion
 
