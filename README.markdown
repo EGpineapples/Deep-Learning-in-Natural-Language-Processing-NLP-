@@ -44,7 +44,7 @@ def compute_log_probability(model, sentence):
     outputs = model(tokenize_input, labels=tokenize_input)
     log_prob = outputs.loss * -1
     return log_prob.item()
-
+'''
 # Compute DPO loss
 beta = 1
 $$ \text{DPO Loss} = -\log\left(\frac{\exp(\beta \cdot (\log p_\theta(y_w|x) - \log p_\text{ref}(y_w|x)))}{\exp(\beta \cdot (\log p_\theta(y_w|x) - \log p_\text{ref}(y_w|x))) + \exp(\beta \cdot (\log p_\theta(y_l|x) - \log p_\text{ref}(y_l|x)))}\right) $$
